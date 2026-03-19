@@ -19,7 +19,7 @@ This system consists of 8 main modules, each utilizing a specific data structure
 *(Instructions on how to compile the C files will be added here once the main implementation is done)*
 
 ## 👥 Contributors
-* Malaka Prsad | prasad-liy22  - Project Lead & Pharmacy Inventory
+* Malaka Prsad | @prasad-liy22  - Project Lead & Pharmacy Inventory
 * [Member 2 Name] - OPD Waiting System
 * [Member 3 Name] - Ward Navigation & Management
 * [Member 4 Name] - ICU Bed Management
