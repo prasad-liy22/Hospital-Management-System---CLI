@@ -24,7 +24,7 @@ This system consists of 8 main modules, each utilizing a specific data structure
 * [Member 3 Name] - Ward Navigation & Management
 * [Member 4 Name] - ICU Bed Management
 * [Member 5 Name] - Patient Treatment Sequence
-* [Member 6 Name] - Round-Robin Duty Rosters
+* Thamod Idusara | @thamod-03 - Round-Robin Duty Rosters
 * [Member 7 Name] - Endless Vitals Monitor
 * [Member 8 Name] - Pharmacy Inventory
 *(Add the rest of your team members here)*
