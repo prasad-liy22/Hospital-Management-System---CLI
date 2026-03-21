@@ -1,6 +1,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <string.h>
+#include "../include/emergency_stack.h"
 
 struct Patient {
     int id;
