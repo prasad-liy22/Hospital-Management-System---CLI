@@ -1,0 +1,15 @@
+1009 Losartan_50mg 50 18.00 Pfizer 20250910 BP_Control 20260210
+1003 Vitamin_C 150 5.00 Glaxo 20251115 Supplement 20260315
+1004 Ibuprofen_400mg 85 8.50 Pfizer 20251201 Pain_Relief 20260322
+1011 Azithromycin_500mg 60 45.00 Hemas 20260201 Antibiotic 20260324
+1002 Amoxicillin_250mg 25 15.00 Hemas 20250520 Antibiotic 20260325
+1007 Omeprazole_20mg 20 12.00 Hemas 20250215 Acidity 20260328
+1013 Insulin_Injection 30 1200.00 Pfizer 20260115 Diabetes 20260401
+1015 Deriphyllin_Retard 400 10.00 SPC 20250505 Asthma 20260505
+1001 Paracetamol_500mg 500 2.50 SPC 20250110 Painkiller 20270110
+1006 Metformin_500mg 1000 3.50 SPC 20250810 Diabetes 20270810
+1010 Atorvastatin_20mg 250 25.00 Cipla 20251010 Cholesterol 20271010
+1012 Salbutamol_Inhaler 120 450.00 Glaxo 20251120 Asthma 20271120
+1008 Aspirin_75mg 400 6.00 Glaxo 20260120 Heart_Care 20280120
+1014 Panadol_Syrup 200 150.00 Glaxo 20260210 Kids_Fever 20280210
+1005 Cetirizine_10mg 300 4.00 Morison 20260105 Allergy 20280520

@@ -21,6 +21,7 @@ void saveToFile();
 void addMedicine();
 void dispenseMedicine();
 void bubbleSortByExpiry();
+int getDifferenceInDays(int currentDate, int targetDate);
 void insertionSortByQuantity();
 void checkAlerts(int currentDate);
 void viewInventory();

@@ -1,13 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h> // Added for advanced date calculations
 #include "../include/pharmacy_array.h"
 
 // Global inventory array and count
 static Medicine inventory[MAX_MEDICINES];
 static int medicineCount = 0;
 
+// Helper function to calculate the difference in days between two YYYYMMDD dates
+int getDifferenceInDays(int currentDate, int targetDate) {
+    struct tm date1 = {0};
+    struct tm date2 = {0};
+
+    // Extract Year, Month, Day for currentDate
+    date1.tm_year = (currentDate / 10000) - 1900;
+    date1.tm_mon  = ((currentDate / 100) % 100) - 1;
+    date1.tm_mday = currentDate % 100;
+    date1.tm_isdst = 0; 
+
+    // Extract Year, Month, Day for targetDate (Expiry Date)
+    date2.tm_year = (targetDate / 10000) - 1900;
+    date2.tm_mon  = ((targetDate / 100) % 100) - 1;
+    date2.tm_mday = targetDate % 100;
+    date2.tm_isdst = 0;
+
+    // Convert to time_t (seconds since epoch)
+    time_t time1 = mktime(&date1);
+    time_t time2 = mktime(&date2);
+
+    // Calculate difference in seconds and convert to days
+    double seconds = difftime(time2, time1);
+    return (int)(seconds / (60 * 60 * 24));
+}
+
 void loadFromFile() {
+    // FIXED: File path updated to match saveToFile()
     FILE *file = fopen("../pharmacy_data.txt", "r");
     if (file == NULL) {
         printf("No existing pharmacy data file found. Starting fresh.\n");
@@ -25,9 +53,8 @@ void loadFromFile() {
     printf("Pharmacy data loaded successfully! (%d items)\n", medicineCount);
 }
 
-// this function saves the current inventory to a file for persistence
 void saveToFile() {
-    FILE *file = fopen("pharmacy_data.txt", "w");
+    FILE *file = fopen("../pharmacy_data.txt", "w");
     if (file == NULL) {
         printf("Error saving pharmacy data!\n");
         return;
@@ -64,7 +91,6 @@ void addMedicine() {
     printf("Medicine added successfully!\n");
 }
 
-// This function allows the user to dispense a medicine by ID and quantity, updating the inventory accordingly
 void dispenseMedicine() {
     int searchId, qtyToDispense, found = 0;
     printf("\n--- Dispense Medicine ---\n");
@@ -78,10 +104,13 @@ void dispenseMedicine() {
             printf("Enter quantity to dispense: ");
             scanf("%d", &qtyToDispense);
             
-            if (qtyToDispense <= inventory[i].quantity) {
+            // FIXED: Added validation to prevent negative values (qtyToDispense > 0)
+            if (qtyToDispense > 0 && qtyToDispense <= inventory[i].quantity) {
                 inventory[i].quantity -= qtyToDispense;
                 printf("Dispensed successfully! Remaining quantity: %d\n", inventory[i].quantity);
                 saveToFile();
+            } else if (qtyToDispense <= 0) {
+                printf("Error: Invalid quantity entered!\n");
             } else {
                 printf("Error: Not enough quantity in stock!\n");
             }
@@ -91,7 +120,6 @@ void dispenseMedicine() {
     if (!found) printf("Error: Medicine ID not found.\n");
 }
 
-// This function sorts the inventory by expiry date using the bubble sort algorithm, allowing the user to easily identify medicines that are expiring soon
 void bubbleSortByExpiry() {
     for (int i = 0; i < medicineCount - 1; i++) {
         for (int j = 0; j < medicineCount - i - 1; j++) {
@@ -106,7 +134,6 @@ void bubbleSortByExpiry() {
     saveToFile();
 }
 
-// this function sorts the inventory by quantity using the insertion sort algorithm, helping the user to quickly identify medicines that are low in stock
 void insertionSortByQuantity() {
     for (int i = 1; i < medicineCount; i++) {
         Medicine key = inventory[i];
@@ -121,7 +148,6 @@ void insertionSortByQuantity() {
     saveToFile();
 }
 
-// This function checks for medicines that are low in stock (quantity < 100) or expiring soon (expiry date within 7 days) and displays alerts to the user, helping them to take timely action to restock or remove expired medicines
 void checkAlerts(int currentDate) {
     printf("\n=== SYSTEM ALERTS ===\n");
     int alertCount = 0;
@@ -130,18 +156,22 @@ void checkAlerts(int currentDate) {
             printf("[LOW STOCK] %s (ID: %d) - Only %d left!\n", inventory[i].name, inventory[i].id, inventory[i].quantity);
             alertCount++;
         }
-        if (inventory[i].expiryDate - currentDate <= 7 && inventory[i].expiryDate >= currentDate) {
-            printf("[EXPIRING SOON] %s (ID: %d) expires on %d!\n", inventory[i].name, inventory[i].id, inventory[i].expiryDate);
+        
+        // FIXED: Using advanced date calculation
+        int daysUntilExpiry = getDifferenceInDays(currentDate, inventory[i].expiryDate);
+        
+        if (daysUntilExpiry < 0) {
+            printf("[EXPIRED] %s (ID: %d) already expired!\n", inventory[i].name, inventory[i].id);
             alertCount++;
-        } else if (inventory[i].expiryDate < currentDate) {
-            printf("[EXPIRED] %s (ID: %d) already expired on %d!\n", inventory[i].name, inventory[i].id, inventory[i].expiryDate);
+        } else if (daysUntilExpiry <= 7) {
+            printf("[EXPIRING SOON] %s (ID: %d) expires in %d days! (Date: %d)\n", 
+                   inventory[i].name, inventory[i].id, daysUntilExpiry, inventory[i].expiryDate);
             alertCount++;
         }
     }
     if (alertCount == 0) printf("All good! No alerts right now.\n");
     printf("=====================\n");
 }
-
 
 void viewInventory() {
     printf("\n----------------------------------------------------------------------------------------------------------\n");
@@ -157,25 +187,22 @@ void viewInventory() {
     printf("----------------------------------------------------------------------------------------------------------\n");
 }
 
-// submenu function to run the pharmacy system
 void runPharmacySystem() {
     loadFromFile();
     int choice;
     int currentDate;
     
-    do
-    {
+    do {
         printf("\nEnter today's date (YYYYMMDD) for Pharmacy alerts: ");
         scanf("%d", &currentDate);
-    } while (currentDate < 20240000 || currentDate > 20280000); // simple validation for current year
+    } while (currentDate < 20240000 || currentDate > 20280000); 
     
-
     do {
         printf("\n=== PHARMACY SUB-MENU ===\n");
         printf("1. Add New Medicine\n");
         printf("2. Dispense Medicine\n");
-        printf("3. Sort by Expiry Date (Bubble Sort)\n");
-        printf("4. Sort by Quantity (Insertion Sort)\n");
+        printf("3. Sort by Expiry Date\n");
+        printf("4. Sort by Quantity\n");
         printf("5. View Inventory\n");
         printf("6. Check Alerts\n");
         printf("0. Back to Main Hospital Menu\n");
