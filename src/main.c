@@ -4,6 +4,7 @@
 #include "../include/emergency_stack.h"
 #include "../include/opd_queue.h"
 #include "../include/ward_dll.h"
+#include "../include/icu_array.h"
 #include "../include/roster_csll.h"
 #include "../include/pharmacy_array.h"
 #include "../include/treatment_sll.h"
@@ -47,6 +48,9 @@ int main()
         case 3:
             runWardSystem();
             break;
+         case 4:
+            runICUArray();
+            break;    
         case 5:
             runTreatment();
             break;
