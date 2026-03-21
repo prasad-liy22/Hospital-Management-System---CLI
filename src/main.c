@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "icu_array.h"
+#include "../include/icu_array.h"
 #include "../include/emergency_stack.h"
 #include "../include/opd_queue.h"
 #include "../include/pharmacy_array.h"
