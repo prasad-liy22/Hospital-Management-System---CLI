@@ -23,7 +23,7 @@ This system consists of 8 main modules, each utilizing a specific data structure
 * Mithesha Nuwanjana |@MNuwanjana - OPD Waiting System
 * Thiseni Nudara | @Thiseni-Nuda - Ward Navigation & Management
 * [Member 4 Name] - ICU Bed Management
-* [Member 5 Name] - Patient Treatment Sequence
+* Sandeepa Dilmina | @sandeepa-gittech - Patient Treatment Sequence
 * Thamod Idusara | @thamod-03 - Round-Robin Duty Rosters
 * [Member 7 Name] - Endless Vitals Monitor
 * Amaya Senadheera | @Amaya-Senadheera - Emergency case Handling

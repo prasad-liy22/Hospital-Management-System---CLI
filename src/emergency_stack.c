@@ -3,17 +3,11 @@
 #include <string.h>
 #include "../include/emergency_stack.h"
 
-struct Patient {
-    int id;
-    char name[50];
-    struct Patient* next;
-};
-
-struct Patient* top = NULL;
+struct EmergencyPatient* top = NULL;
 
 //Add Emergency Patient (Push) 
 void add_emergency_patient() {
-    struct Patient* newNode = (struct Patient*)malloc(sizeof(struct Patient));
+    struct EmergencyPatient* newNode = (struct EmergencyPatient*)malloc(sizeof(struct EmergencyPatient));
 
     printf("Enter Patient ID: ");
     scanf("%d", &newNode->id);
@@ -31,7 +25,7 @@ void treat_patient() {
     if (top == NULL) {
         printf("No emergency patients!\n");
     } else {
-        struct Patient* temp = top;
+        struct EmergencyPatient* temp = top;
         printf("Treating Patient: %d - %s\n", temp->id, temp->name);
 
         top = top->next;
@@ -40,8 +34,8 @@ void treat_patient() {
 }
 
 //Display  
-void display() {
-    struct Patient* temp = top;
+void display_emergency_patients() {
+    struct EmergencyPatient* temp = top;
 
     if (temp == NULL) {
         printf("No emergency patients\n");
@@ -76,7 +70,7 @@ void run_emergency_system() {
                 break;
 
             case 3:
-                display();
+                display_emergency_patients();
                 break;
 
             case 4:
@@ -89,5 +83,4 @@ void run_emergency_system() {
 
     } while(choice != 4);
 
-    return 0;
 }

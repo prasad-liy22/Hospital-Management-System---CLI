@@ -4,8 +4,8 @@
 #include <ctype.h>
 #include "../include/opd_queue.h" 
 
-struct Patient* front = NULL;
-struct Patient* rear = NULL;
+struct OPDPatient* front = NULL;
+struct OPDPatient* rear = NULL;
 
 // Global variable to track the next available ID
 int next_patient_id = 1;
@@ -18,7 +18,7 @@ void clearBuffer() {
 
 // 1. Enqueue with Input Validation
 void enqueue() {
-    struct Patient* newNode = (struct Patient*)malloc(sizeof(struct Patient));
+    struct OPDPatient* newNode = (struct OPDPatient*)malloc(sizeof(struct OPDPatient));
 
     if (newNode == NULL) {
         printf("Memory allocation failed!\n");
@@ -95,7 +95,7 @@ void dequeue() {
         return;
     }
 
-    struct Patient* temp = front;
+    struct OPDPatient* temp = front;
     printf("\n[TREATMENT ROOM] Calling Patient ID %d: %s\n", temp->id, temp->full_name);
     printf("  Symptoms reported: %s\n", temp->symptoms);
 
@@ -125,7 +125,7 @@ void display() {
         return;
     }
 
-    struct Patient* temp = front;
+    struct OPDPatient* temp = front;
     printf("\n=== Current OPD Waiting List ===\n");
     int position = 1;
     while (temp != NULL) {
@@ -153,7 +153,7 @@ void searchPatientByID() {
     }
     clearBuffer();
 
-    struct Patient* temp = front;
+    struct OPDPatient* temp = front;
     int position = 1;
     int found = 0;
 

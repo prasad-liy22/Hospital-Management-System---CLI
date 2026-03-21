@@ -2,10 +2,10 @@
 #define EMERGENCY_STACK_H
 
 // Patient structure for Emergency Stack
-struct Patient {
+struct EmergencyPatient {
     int id;
     char name[50];
-    struct Patient* next;
+    struct EmergencyPatient* next;
 };
 
 // Function prototypes for Emergency Stack module
