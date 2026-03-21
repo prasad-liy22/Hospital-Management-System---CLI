@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "icu_array.h"
 #include "../include/emergency_stack.h"
 #include "../include/opd_queue.h"
 #include "../include/pharmacy_array.h"
@@ -15,6 +15,7 @@ int main() {
         printf("=========================================\n");
         printf("1. Emergency Case Handling (Stack)\n");
         printf("2. OPD Waiting System (Queue)\n");
+        printf("4. ICU Bed Management System (Array)\n");
         printf("8. Pharmacy Inventory (Array)\n");
         printf("0. Exit\n");
         printf("-----------------------------------------\n");
@@ -28,8 +29,11 @@ int main() {
             case 2:
                 // handleOPD();
                 break;
+             case 4:
+                runICUArray();
+                break;    
             case 8:
-                displayInventory();
+                //displayInventory();
                 break;
             case 0:
                 printf("Exiting system...\n");
