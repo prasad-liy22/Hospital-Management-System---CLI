@@ -1,25 +1,31 @@
 #ifndef EMERGENCY_STACK_H
 #define EMERGENCY_STACK_H
 
-// Patient structure for Emergency Stack
-struct EmergencyPatient {
+// Emergency Patient Structure
+typedef struct Patient {
     int id;
-    char name[50];
-    struct EmergencyPatient* next;
-};
+    char full_name[100];
+    int age;
+    char gender;
+    char contact_number[15];
+    char emergency_type[50];
+    int severity_level;
+    struct Patient* next;
+} Patient;
 
-// Function prototypes for Emergency Stack module
+// Stack Operations (Core)
+void add_emergency_patient();        // Push
+void treat_patient();                // Pop
+void display_emergency_patients();   // Display all
 
-// Add emergency patient (Push)
-void add_emergency_patient();
+// Additional Operations
+void peek_emergency_patient();       // View top patient
+int isEmpty();                       // Check if stack is empty
+int count_emergency_patients();      // Count total patients
+void search_emergency_patient();     // Search by ID
+void clear_emergency_stack();        // Clear all patients
 
-// Treat emergency patient (Pop)
-void treat_patient();
-
-// Display all emergency patients
-void display_emergency_patients();
-
-// Run Emergency System (Menu)
-void run_emergency_system();
+// System Controller
+void runEmergencySystem();         // Menu system
 
 #endif
