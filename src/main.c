@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "emergency_stack.h"
-#include "opd_queue.h"
-#include "roster_csll.h"
-#include "pharmacy_array.h"
+#include "../include/emergency_stack.h"
+#include "../include/opd_queue.h"
+#include "../include/roster_csll.h"
+#include "../include/pharmacy_array.h"
 
 int main()
 {
@@ -15,10 +15,14 @@ int main()
         printf("\n=========================================\n");
         printf("       HOSPITAL MANAGEMENT SYSTEM        \n");
         printf("=========================================\n");
-        printf("1. Emergency Case Handling (Stack)\n");
-        printf("2. OPD Waiting System (Queue)\n");
-        printf("6. Round Robin Duty Roster System (Circular Singly Linked List)");
-        printf("8. Pharmacy Inventory (Array)\n");
+        printf("1. Emergency Case Handling\n");
+        printf("2. OPD Waiting System\n");
+        printf("3. Ward Navigation & Management\n");
+        printf("4. ICU Bed Management\n");
+        printf("5. Patient Treatment Sequence\n");
+        printf("6. Round-Robin Duty Rosters\n");
+        printf("7. Endless Vitals Monitor\n");
+        printf("8. Pharmacy Inventory\n");
         printf("0. Exit\n");
         printf("-----------------------------------------\n");
         printf("Enter your choice: ");
@@ -36,7 +40,7 @@ int main()
             runRosterSystem();
             break;
         case 8:
-            // displayInventory();
+            runPharmacySystem();
             break;
         case 0:
             printf("Exiting system...\n");
