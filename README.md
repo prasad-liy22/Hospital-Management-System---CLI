@@ -26,5 +26,5 @@ This system consists of 8 main modules, each utilizing a specific data structure
 * [Member 5 Name] - Patient Treatment Sequence
 * Thamod Idusara | @thamod-03 - Round-Robin Duty Rosters
 * [Member 7 Name] - Endless Vitals Monitor
-* [Member 8 Name] - Pharmacy Inventory
+* Amaya Senadheera | @Amaya-Senadheera - Emergency case Handling
 *(Add the rest of your team members here)*
