@@ -19,5 +19,6 @@ void dequeue();
 void peek();
 void display();
 void searchPatientByID();
+void handleOPD();
 
 #endif
