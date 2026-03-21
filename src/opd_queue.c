@@ -178,3 +178,47 @@ void searchPatientByID() {
         printf("\nPatient with ID %d is not in the current OPD waiting list.\n", searchID);
     }
 }
+
+// 6. OPD Sub-Menu (Called by main.c)
+void handleOPD() {
+    int choice;
+    do {
+        printf("\n--- OPD Queue Menu ---\n\n");
+        printf("1. Add Patient\n");
+        printf("2. Treat Patient\n");
+        printf("3. View Next Patient\n");
+        printf("4. Display All Patients\n");
+        printf("5. Search Patients By ID\n");
+        printf("6. Return to Main Hospital Menu\n\n");
+        printf("Enter your choice: ");
+
+        // validation for menu choice
+        if (scanf("%d", &choice) != 1) {
+            choice = 0; // Reset choice to trigger default case
+        }
+        clearBuffer();
+
+        switch(choice) {
+            case 1:
+                enqueue();
+                break;
+            case 2:
+                dequeue();
+                break;
+            case 3:
+                peek();
+                break;
+            case 4:
+                display();
+                break;
+            case 5:
+                searchPatientByID();
+                break;
+            case 6:
+                printf("Returning to Main Hospital System...\n");
+                break;
+            default:
+                printf("Invalid choice! Please enter a number from 1 to 6.\n");
+        }
+    } while(choice != 6);
+}
