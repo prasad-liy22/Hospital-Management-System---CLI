@@ -10,9 +10,6 @@ typedef struct Patient {
     struct Patient* next;
 } Patient;
 
-// Global Variable
-extern Patient* head;
-
 // Function Prototypes
 void loadPatients();
 void savePatients();

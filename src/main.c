@@ -7,6 +7,7 @@
 #include "../include/roster_csll.h"
 #include "../include/pharmacy_array.h"
 #include "../include/treatment_sll.h"
+#include "../include/vitals_cdll.h"
 
 
 int main()
@@ -43,11 +44,17 @@ int main()
         case 2:
             handleOPD();
             break;
+        case 3:
+            runWardSystem();
+            break;
         case 5:
             runTreatment();
             break;
         case 6:
             runRosterSystem();
+            break;
+        case 7:
+            runEndlessVitalsMonitor();
             break;
         case 8:
             runPharmacySystem();

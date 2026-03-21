@@ -4,8 +4,8 @@
 #include "../include/pharmacy_array.h"
 
 // Global inventory array and count
-Medicine inventory[MAX_MEDICINES];
-int medicineCount = 0;
+static Medicine inventory[MAX_MEDICINES];
+static int medicineCount = 0;
 
 void loadFromFile() {
     FILE *file = fopen("../pharmacy_data.txt", "r");

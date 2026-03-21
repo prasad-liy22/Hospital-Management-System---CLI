@@ -3,7 +3,7 @@
 #include <string.h>
 #include "../include/ward_dll.h"
 
-struct Patient* head = NULL;
+static struct Patient* head = NULL;
 
 // Load patients from file
 void loadPatients() {

@@ -15,10 +15,6 @@ typedef struct {
     int expiryDate;    // Format: YYYYMMDD
 } Medicine;
 
-// Global Variables
-Medicine inventory[MAX_MEDICINES];
-extern int medicineCount;
-
 // Function Prototypes
 void loadFromFile();
 void saveToFile();
