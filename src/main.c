@@ -3,8 +3,10 @@
 
 #include "../include/emergency_stack.h"
 #include "../include/opd_queue.h"
+#include "../include/ward_dll.h"
 #include "../include/roster_csll.h"
 #include "../include/pharmacy_array.h"
+
 
 int main()
 {
@@ -39,6 +41,9 @@ int main()
             break;
         case 2:
             handleOPD();
+            break;
+        case 3: 
+            runWardSystem();
             break;
         case 6:
             runRosterSystem();
