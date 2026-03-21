@@ -35,7 +35,7 @@ int main()
         switch (choice)
         {
         case 1:
-            // handleEmergency();
+            run_emergency_system();
             break;
         case 2:
             handleOPD();
