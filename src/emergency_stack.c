@@ -1,18 +1,48 @@
-#include <stdio.h> 
-#include <stdlib.h> 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "../include/emergency_stack.h"
 
-struct EmergencyPatient* top = NULL;
+struct Patient* top = NULL;
 
-//Add Emergency Patient (Push) 
+// Clear input buffer
+void clearBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+// Add Emergency Patient (Push)
 void add_emergency_patient() {
-    struct EmergencyPatient* newNode = (struct EmergencyPatient*)malloc(sizeof(struct EmergencyPatient));
+    struct Patient* newNode = (struct Patient*)malloc(sizeof(struct Patient));
+
+    if (newNode == NULL) {
+        printf("Memory allocation failed!\n");
+        return;
+    }
 
     printf("Enter Patient ID: ");
     scanf("%d", &newNode->id);
-    printf("Enter Patient Name: ");
-    scanf("%s", newNode->name);
+    clearBuffer();
+
+    printf("Enter Full Name: ");
+    scanf(" %[^\n]", newNode->full_name);
+
+    printf("Enter Age: ");
+    scanf("%d", &newNode->age);
+    clearBuffer();
+
+    printf("Enter Gender (M/F): ");
+    scanf(" %c", &newNode->gender);
+    clearBuffer();
+
+    printf("Enter Contact Number: ");
+    scanf(" %[^\n]", newNode->contact_number);
+
+    printf("Enter Emergency Type: ");
+    scanf(" %[^\n]", newNode->emergency_type);
+
+    printf("Enter Severity Level (1-5): ");
+    scanf("%d", &newNode->severity_level);
 
     newNode->next = top;
     top = newNode;
@@ -20,43 +50,127 @@ void add_emergency_patient() {
     printf("Emergency patient added!\n");
 }
 
-//Treat Patient (Pop) 
-void treat_patient() { 
+// Treat Patient (Pop)
+void treat_patient() {
     if (top == NULL) {
         printf("No emergency patients!\n");
-    } else {
-        struct EmergencyPatient* temp = top;
-        printf("Treating Patient: %d - %s\n", temp->id, temp->name);
-
-        top = top->next;
-        free(temp);
+        return;
     }
+
+    struct Patient* temp = top;
+
+    printf("\n Treating Patient:\n");
+    printf("ID: %d | Name: %s\n", temp->id, temp->full_name);
+    printf("Emergency: %s | Severity: %d\n",
+           temp->emergency_type, temp->severity_level);
+
+    top = top->next;
+    free(temp);
 }
 
-//Display  
+// Display All Patients
 void display_emergency_patients() {
-    struct EmergencyPatient* temp = top;
+    struct Patient* temp = top;
 
     if (temp == NULL) {
         printf("No emergency patients\n");
-    } else {
-        while (temp != NULL) {
-            printf("%d - %s\n", temp->id, temp->name);
-            temp = temp->next;
-        }
+        return;
+    }
+
+    printf("\n--- Emergency Patients ---\n");
+
+    while (temp != NULL) {
+        printf("ID: %d | Name: %s | Age: %d | Gender: %c\n",
+               temp->id, temp->full_name, temp->age, temp->gender);
+
+        printf("Contact: %s | Emergency: %s | Severity: %d\n",
+               temp->contact_number, temp->emergency_type, temp->severity_level);
+
+        printf("----------------------------------\n");
+
+        temp = temp->next;
     }
 }
 
-//Call Main Function  
-void run_emergency_system() {
+// Peek Top Patient
+void peek_emergency_patient() {
+    if (top == NULL) {
+        printf("No emergency patients!\n");
+        return;
+    }
+
+    printf("Next Patient: %d - %s\n", top->id, top->full_name);
+}
+
+// Check Empty
+int isEmpty() {
+    return (top == NULL);
+}
+
+// Count Patients
+int count_emergency_patients() {
+    int count = 0;
+    struct Patient* temp = top;
+
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+
+    return count;
+}
+
+// Search Patient
+void search_emergency_patient() {
+    int id;
+
+    printf("Enter Patient ID to search: ");
+    scanf("%d", &id);
+
+    struct Patient* temp = top;
+
+    while (temp != NULL) {
+        if (temp->id == id) {
+            printf("\n Patient Found:\n");
+            printf("ID: %d | Name: %s | Age: %d\n",
+                   temp->id, temp->full_name, temp->age);
+            printf("Emergency: %s | Severity: %d\n",
+                   temp->emergency_type, temp->severity_level);
+            return;
+        }
+        temp = temp->next;
+    }
+
+    printf("Patient not found!\n");
+}
+
+// Clear Stack
+void clear_emergency_stack() {
+    struct Patient* temp;
+
+    while (top != NULL) {
+        temp = top;
+        top = top->next;
+        free(temp);
+    }
+
+    printf("All emergency patients cleared!\n");
+}
+
+// Main Menu 
+void runEmergencySystem() {
     int choice;
 
     do {
-        printf("\n--- Emergency System Menu ---\n");
+        printf("\n=== Emergency System Menu ===\n");
         printf("1. Add Emergency Patient (Push)\n");
         printf("2. Treat Patient (Pop)\n");
-        printf("3. Display Emergency Patients\n");
-        printf("4. Exit\n");
+        printf("3. Display Patients\n");
+        printf("4. Peek Top Patient\n");
+        printf("5. Count Patients\n");
+        printf("6. Search Patient\n");
+        printf("7. Clear All Patients\n");
+        printf("8. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -74,13 +188,28 @@ void run_emergency_system() {
                 break;
 
             case 4:
-                printf("Exiting...\n");
+                peek_emergency_patient();
+                break;
+
+            case 5:
+                printf("Total Patients: %d\n", count_emergency_patients());
+                break;
+
+            case 6:
+                search_emergency_patient();
+                break;
+
+            case 7:
+                clear_emergency_stack();
+                break;
+
+            case 8:
+                printf("Exiting system...\n");
                 break;
 
             default:
                 printf("Invalid choice!\n");
         }
 
-    } while(choice != 4);
-
+    } while(choice != 8);
 }
