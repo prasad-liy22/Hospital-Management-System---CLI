@@ -162,9 +162,9 @@ void runEmergencySystem() {
     int choice;
 
     do {
-        printf("\n=== Emergency System Menu ===\n");
-        printf("1. Add Emergency Patient (Push)\n");
-        printf("2. Treat Patient (Pop)\n");
+        printf("\n--- Emergency System Menu ---\n\n");
+        printf("1. Add Emergency Patient\n");
+        printf("2. Treat Patient\n");
         printf("3. Display Patients\n");
         printf("4. Peek Top Patient\n");
         printf("5. Count Patients\n");
