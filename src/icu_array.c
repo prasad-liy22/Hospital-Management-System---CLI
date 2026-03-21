@@ -1,6 +1,6 @@
 #include <stdio.h> 
 #define TOTAL_BEDS 10 
-#include "icu_array.h"
+#include "../include/icu_array.h"
 
 void runICUArray() { 
 int icu_beds[TOTAL_BEDS] = {0}; 
