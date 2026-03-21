@@ -28,13 +28,17 @@ int main()
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
+        // Clear buffer from the main menu input
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
         switch (choice)
         {
         case 1:
             // handleEmergency();
             break;
         case 2:
-            // handleOPD();
+            handleOPD();
             break;
         case 6:
             runRosterSystem();
