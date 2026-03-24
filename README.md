@@ -16,7 +16,6 @@ This system consists of 8 main modules, each utilizing a specific data structure
 8. **Pharmacy Inventory** (`Array` with `Bubble/Insertion Sort`) - Manages medicine stock and prioritizes dispensing based on expiration dates.
 
 ## 🛠️ How to Compile and Run
-## 🛠️ How to Compile and Run
 
 ### Prerequisites
 Make sure you have a C compiler installed on your system (e.g., **GCC**).
