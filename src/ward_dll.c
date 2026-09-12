@@ -21,7 +21,7 @@ void loadPatients() {
     }
 
     fclose(file);
-    printf("Ward data loaded unsuccessfully!\n");
+    printf("Ward data loaded done!\n");
 }
 
 // Save patients to file
